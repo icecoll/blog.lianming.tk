@@ -79,6 +79,107 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2018/08/01/composite-images-in-ruby/" title="composite images in ruby" itemprop="url">composite images in ruby</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="lam" target="_blank" itemprop="author">lam</a>
+		
+  <p class="article-time">
+    <time datetime="2018-08-01T07:53:07.000Z" itemprop="datePublished"> Published 2018-08-01</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><p>  在一张宣传图片上加上二维码和自己的微信头像, 用到mini_magick这个gem即可.</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">require</span> <span class="string">"mini_magick"</span></span><br><span class="line"><span class="keyword">require</span> <span class="string">'net/http'</span></span><br><span class="line"><span class="keyword">require</span> <span class="string">'tempfile'</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">composite_image</span><span class="params">(qrcode_ticket=<span class="string">"gQEn8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyd2RybG95cTNma2wxMDAwME0wMy0AAgRK9RhbAwQAAAAA"</span>)</span></span></span><br><span class="line">  qrcode_uri = URI(<span class="string">"https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=<span class="subst">#&#123;qrcode_ticket&#125;</span>"</span>)</span><br><span class="line">  res = Net::HTTP.get_response(qrcode_uri)</span><br><span class="line">  raise <span class="string">"get qrcode faild error "</span> <span class="keyword">unless</span> res.is_a?(Net::HTTPSuccess)</span><br><span class="line"></span><br><span class="line">  tmpfile = Tempfile.new(qrcode_ticket)</span><br><span class="line">  open(tmpfile.path, <span class="string">"wb"</span>) &#123; <span class="params">|file|</span> file.write(res.body) &#125;</span><br><span class="line"></span><br><span class="line">  profile_uri = URI(<span class="string">"http://thirdwx.qlogo.cn/mmopen/8StU3PHCdLkPhx9kGZM1AYf9Ou2kncJb1RCCYc3DGoBoapgtdqrSDAKWIq7oNUcekicmxfDoLok5Spicf9uG4G5ZwpkkuKoXRw/132"</span>)</span><br><span class="line">  profile_res = Net::HTTP.get_response(profile_uri)</span><br><span class="line">  raise <span class="string">"get qrcode faild error "</span> <span class="keyword">unless</span> profile_res.is_a?(Net::HTTPSuccess)</span><br><span class="line"></span><br><span class="line">  profile_image = Tempfile.new([<span class="string">"profile"</span>, <span class="string">'.jpg'</span>])</span><br><span class="line">  open(profile_image.path, <span class="string">"wb"</span>) &#123; <span class="params">|file|</span> file.write(profile_res.body) &#125;</span><br><span class="line"></span><br><span class="line">  MiniMagick::Tool::Convert.new <span class="keyword">do</span> <span class="params">|c|</span></span><br><span class="line">    c &lt;&lt; <span class="string">"monkey100.jpg"</span></span><br><span class="line">    c.merge! [tmpfile.path, <span class="string">"-geometry"</span>, <span class="string">"205x205+433+955"</span>, <span class="string">"-composite"</span>]  <span class="comment"># -geometry 选项指定大小和位置，这里只是设置了位置。</span></span><br><span class="line">    c.merge! [profile_image.path, <span class="string">"-geometry"</span>, <span class="string">"95x95+10+10"</span>, <span class="string">"-composite"</span>]</span><br><span class="line">    c.merge! [<span class="string">"-pointsize"</span>, <span class="string">"26"</span>, <span class="string">"-font"</span>, <span class="string">"./simfang.ttf"</span>, <span class="string">"-fill"</span>, <span class="string">"black"</span>, <span class="string">"-draw"</span>, <span class="string">"text 120,60 '安'"</span>]</span><br><span class="line">    c &lt;&lt; <span class="string">"out.jpg"</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">composite_image()</span><br></pre></td></tr></table></figure>
+<h2 id="git-demo"><a href="#git-demo" class="headerlink" title="git demo"></a>git demo</h2><p><a href="https://github.com/icecoll/blog-demos/tree/master/composite-images-in-ruby" target="_blank" rel="noopener">Goooooo</a></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/06/29/录制网页/" title="录制网页" itemprop="url">录制网页</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="lam" target="_blank" itemprop="author">lam</a>
+		
+  <p class="article-time">
+    <time datetime="2018-06-29T09:48:28.000Z" itemprop="datePublished"> Published 2018-06-29</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2018/06/17/hello-world/" title="Hello World" itemprop="url">Hello World</a>
   </h1>
   <p class="article-author">By
@@ -152,7 +253,7 @@
         
           <li>
             
-            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            	<a href="https://ruby-china.com" target="_blank" title="一个面向程序员交流分享的新一代社区">ruby-china</a>
             
           </li>
         
@@ -299,6 +400,15 @@ $(document).ready(function(){
 
 
 <!-- Analytics Begin -->
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-120905838-1', 'blog.lianming.tk');  
+ga('send', 'pageview');
+</script>
 
 
 

@@ -4,24 +4,24 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Hello World | blog</title>
+    <title>composite images in ruby | blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="lam">
     
 
     
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+    <meta name="description" content="应用场景  在一张宣传图片上加上二维码和自己的微信头像, 用到mini_magick这个gem即可. 代码123456789101112131415161718192021222324252627282930require &quot;mini_magick&quot;require &apos;net/http&apos;require &apos;tempfile&apos;def composite_image(qrcode_ticket=&quot;gQEn">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://blog.lianming.tk/2018/06/17/hello-world/index.html">
+<meta property="og:title" content="composite images in ruby">
+<meta property="og:url" content="http://blog.lianming.tk/2018/08/01/composite-images-in-ruby/index.html">
 <meta property="og:site_name" content="blog">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="应用场景  在一张宣传图片上加上二维码和自己的微信头像, 用到mini_magick这个gem即可. 代码123456789101112131415161718192021222324252627282930require &quot;mini_magick&quot;require &apos;net/http&apos;require &apos;tempfile&apos;def composite_image(qrcode_ticket=&quot;gQEn">
 <meta property="og:locale" content="[object Object]">
-<meta property="og:updated_time" content="2018-06-16T16:15:06.060Z">
+<meta property="og:updated_time" content="2018-08-01T08:22:20.894Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="twitter:title" content="composite images in ruby">
+<meta name="twitter:description" content="应用场景  在一张宣传图片上加上二维码和自己的微信头像, 用到mini_magick这个gem即可. 代码123456789101112131415161718192021222324252627282930require &quot;mini_magick&quot;require &apos;net/http&apos;require &apos;tempfile&apos;def composite_image(qrcode_ticket=&quot;gQEn">
 
     
     <link rel="alternative" href="/atom.xml" title="blog" type="application/atom+xml">
@@ -81,14 +81,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2018/06/17/hello-world/" title="Hello World" itemprop="url">Hello World</a>
+      <a href="/2018/08/01/composite-images-in-ruby/" title="composite images in ruby" itemprop="url">composite images in ruby</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="lam" target="_blank" itemprop="author">lam</a>
 		
   <p class="article-time">
-    <time datetime="2018-06-16T16:15:06.060Z" itemprop="datePublished"> Published 2018-06-17</time>
+    <time datetime="2018-08-01T07:53:07.000Z" itemprop="datePublished"> Published 2018-08-01</time>
     
   </p>
 </header>
@@ -97,19 +97,13 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">Contents</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick-Start"><span class="toc-number">1.</span> <span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-new-post"><span class="toc-number">1.1.</span> <span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run-server"><span class="toc-number">1.2.</span> <span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate-static-files"><span class="toc-number">1.3.</span> <span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy-to-remote-sites"><span class="toc-number">1.4.</span> <span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#应用场景"><span class="toc-number">1.</span> <span class="toc-text">应用场景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码"><span class="toc-number">2.</span> <span class="toc-text">代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-demo"><span class="toc-number">3.</span> <span class="toc-text">git demo</span></a></li></ol>
 		
 		</div>
 		
-		<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+		<h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><p>  在一张宣传图片上加上二维码和自己的微信头像, 用到mini_magick这个gem即可.</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">require</span> <span class="string">"mini_magick"</span></span><br><span class="line"><span class="keyword">require</span> <span class="string">'net/http'</span></span><br><span class="line"><span class="keyword">require</span> <span class="string">'tempfile'</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">composite_image</span><span class="params">(qrcode_ticket=<span class="string">"gQEn8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyd2RybG95cTNma2wxMDAwME0wMy0AAgRK9RhbAwQAAAAA"</span>)</span></span></span><br><span class="line">  qrcode_uri = URI(<span class="string">"https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=<span class="subst">#&#123;qrcode_ticket&#125;</span>"</span>)</span><br><span class="line">  res = Net::HTTP.get_response(qrcode_uri)</span><br><span class="line">  raise <span class="string">"get qrcode faild error "</span> <span class="keyword">unless</span> res.is_a?(Net::HTTPSuccess)</span><br><span class="line"></span><br><span class="line">  tmpfile = Tempfile.new(qrcode_ticket)</span><br><span class="line">  open(tmpfile.path, <span class="string">"wb"</span>) &#123; <span class="params">|file|</span> file.write(res.body) &#125;</span><br><span class="line"></span><br><span class="line">  profile_uri = URI(<span class="string">"http://thirdwx.qlogo.cn/mmopen/8StU3PHCdLkPhx9kGZM1AYf9Ou2kncJb1RCCYc3DGoBoapgtdqrSDAKWIq7oNUcekicmxfDoLok5Spicf9uG4G5ZwpkkuKoXRw/132"</span>)</span><br><span class="line">  profile_res = Net::HTTP.get_response(profile_uri)</span><br><span class="line">  raise <span class="string">"get qrcode faild error "</span> <span class="keyword">unless</span> profile_res.is_a?(Net::HTTPSuccess)</span><br><span class="line"></span><br><span class="line">  profile_image = Tempfile.new([<span class="string">"profile"</span>, <span class="string">'.jpg'</span>])</span><br><span class="line">  open(profile_image.path, <span class="string">"wb"</span>) &#123; <span class="params">|file|</span> file.write(profile_res.body) &#125;</span><br><span class="line"></span><br><span class="line">  MiniMagick::Tool::Convert.new <span class="keyword">do</span> <span class="params">|c|</span></span><br><span class="line">    c &lt;&lt; <span class="string">"monkey100.jpg"</span></span><br><span class="line">    c.merge! [tmpfile.path, <span class="string">"-geometry"</span>, <span class="string">"205x205+433+955"</span>, <span class="string">"-composite"</span>]  <span class="comment"># -geometry 选项指定大小和位置，这里只是设置了位置。</span></span><br><span class="line">    c.merge! [profile_image.path, <span class="string">"-geometry"</span>, <span class="string">"95x95+10+10"</span>, <span class="string">"-composite"</span>]</span><br><span class="line">    c.merge! [<span class="string">"-pointsize"</span>, <span class="string">"26"</span>, <span class="string">"-font"</span>, <span class="string">"./simfang.ttf"</span>, <span class="string">"-fill"</span>, <span class="string">"black"</span>, <span class="string">"-draw"</span>, <span class="string">"text 120,60 '安'"</span>]</span><br><span class="line">    c &lt;&lt; <span class="string">"out.jpg"</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">composite_image()</span><br></pre></td></tr></table></figure>
+<h2 id="git-demo"><a href="#git-demo" class="headerlink" title="git demo"></a>git demo</h2><p><a href="https://github.com/icecoll/blog-demos/tree/master/composite-images-in-ruby" target="_blank" rel="noopener">Goooooo</a></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -122,7 +116,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://blog.lianming.tk/2018/06/17/hello-world/" data-title="Hello World | blog" data-tsina="" class="share clearfix">
+	  <div data-url="http://blog.lianming.tk/2018/08/01/composite-images-in-ruby/" data-title="composite images in ruby | blog" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -135,14 +129,14 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2018/06/29/录制网页/" title="录制网页">
-  <strong>上一篇：</strong><br/>
-  <span>
-  录制网页</span>
+
+<div class="next">
+<a href="/2018/06/29/录制网页/"  title="录制网页">
+ <strong>下一篇：</strong><br/> 
+ <span>录制网页
+</span>
 </a>
 </div>
-
 
 </nav>
 
@@ -156,7 +150,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">Contents</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick-Start"><span class="toc-number">1.</span> <span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-new-post"><span class="toc-number">1.1.</span> <span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run-server"><span class="toc-number">1.2.</span> <span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate-static-files"><span class="toc-number">1.3.</span> <span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy-to-remote-sites"><span class="toc-number">1.4.</span> <span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#应用场景"><span class="toc-number">1.</span> <span class="toc-text">应用场景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码"><span class="toc-number">2.</span> <span class="toc-text">代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-demo"><span class="toc-number">3.</span> <span class="toc-text">git demo</span></a></li></ol>
  
   </div>
 
