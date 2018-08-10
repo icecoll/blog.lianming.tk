@@ -77,6 +77,62 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2018/08/10/阿里智能语音API校验/" title="阿里智能语音API校验" itemprop="url">阿里智能语音API校验</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="lam" target="_blank" itemprop="author">lam</a>
+		
+  <p class="article-time">
+    <time datetime="2018-08-10T03:11:58.000Z" itemprop="datePublished"> 发表于 2018-08-10</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h3 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h3><p>调用阿里录音文件识别API时，需要在header中添加校验字符串，参考官网的node示例（<a href="https://help.aliyun.com/document_detail/30245.html?spm=a2c4g.11186623.2.4.2AZ7xc" target="_blank" rel="noopener">传送门</a>），以下给出ruby生成校验字符串的方法．</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">require</span>(<span class="string">"net/http"</span>)</span><br><span class="line"><span class="keyword">require</span>(<span class="string">'base64'</span>)</span><br><span class="line"><span class="keyword">require</span>(<span class="string">'digest'</span>)</span><br><span class="line"><span class="keyword">require</span>(<span class="string">'json'</span>)</span><br><span class="line"><span class="keyword">require</span>(<span class="string">'openssl'</span>)</span><br><span class="line"></span><br><span class="line">app_id = <span class="string">'id'</span></span><br><span class="line">app_secret = <span class="string">"secret"</span></span><br><span class="line">params = &#123;<span class="string">"app_key"</span><span class="symbol">:<span class="string">"nls-service-telephone8khz"</span></span>,<span class="string">"enable_callback"</span><span class="symbol">:false</span>,<span class="string">"oss_link"</span><span class="symbol">:<span class="string">"http://aliyun-nls.oss.aliyuncs.com/asr/fileASR/examples/nls-sample.wav"</span></span>&#125;</span><br><span class="line"></span><br><span class="line">now = <span class="string">"Tue, 19 Dec 2017 07:43:40 GMT"</span> </span><br><span class="line"><span class="comment"># 使用GMT格式时间</span></span><br><span class="line"><span class="comment"># now = Time.now.gmtime.strftime("%a, %d %b %Y %T GMT")</span></span><br><span class="line"></span><br><span class="line">headers = &#123;</span><br><span class="line">  <span class="symbol">method:</span> <span class="string">'POST'</span>,</span><br><span class="line">  <span class="symbol">accept:</span> <span class="string">'application/json'</span>,</span><br><span class="line">  <span class="string">'content-type'</span>: <span class="string">'application/json'</span>,</span><br><span class="line">  <span class="symbol">date:</span> <span class="string">"<span class="subst">#&#123;now&#125;</span>"</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">## step 1. 组stringToSign,注意这里不加urlpath</span></span><br><span class="line">string2sign = <span class="string">"POST"</span> + <span class="string">"\n"</span> + headers[<span class="symbol">:accept</span>] + <span class="string">"\n"</span> +</span><br><span class="line">  Digest::MD5.base64digest(params.to_json) + <span class="string">"\n"</span> + </span><br><span class="line">  headers[<span class="symbol">:<span class="string">"content-type"</span></span>] + <span class="string">"\n"</span> +</span><br><span class="line">  headers[<span class="symbol">:date</span>]</span><br><span class="line">puts string2sign <span class="comment">## =&gt; POST</span></span><br><span class="line">                 <span class="comment">##    application/json</span></span><br><span class="line">                 <span class="comment">##    0yo5NmJ4dReSHOxlItYpvA==</span></span><br><span class="line">                 <span class="comment">##    application/json</span></span><br><span class="line">                 <span class="comment">##    Tue, 19 Dec 2017 07:43:40 GMT</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">## step 2. 加密[Signature = Base64( HMAC-SHA1( AccessSecret, UTF-8-Encoding-Of(StringToSign) ) )]</span></span><br><span class="line">digest = OpenSSL::Digest.new(<span class="string">'sha1'</span>)</span><br><span class="line">signature = Base64.encode64(OpenSSL::HMAC.digest(digest, app_secret, string2sign))</span><br><span class="line"></span><br><span class="line"><span class="comment">## step 3. 组authorization header [Authorization =  Dataplus AccessKeyId + ":" + Signature]</span></span><br><span class="line">auth_header = <span class="string">"Dataplus "</span> + app_id + <span class="string">":"</span> + signature</span><br><span class="line">puts auth_header <span class="comment">## =&gt; Dataplus id:oqoyn3Y1/cPpK2DfU5jy2DbaKws=</span></span><br><span class="line"></span><br><span class="line">uri = URI(<span class="string">"https://nlsapi.aliyun.com/transcriptions"</span>)</span><br><span class="line">response = Net::HTTP.start(uri.host, uri.port, <span class="symbol">use_ssl:</span> uri.scheme == <span class="string">'https'</span>) <span class="keyword">do</span> <span class="params">|http|</span></span><br><span class="line">  request = Net::HTTP::Post.new(uri, &#123;<span class="string">'Accept'</span> =&gt; <span class="string">'application/json'</span>,</span><br><span class="line">                                      <span class="string">'Content-type'</span> =&gt; <span class="string">'application/json'</span>,</span><br><span class="line">                                      <span class="string">'Date'</span> =&gt; <span class="string">"<span class="subst">#&#123;now&#125;</span>"</span>,</span><br><span class="line">                                      <span class="string">'Authorization'</span> =&gt; <span class="string">"<span class="subst">#&#123;auth_header&#125;</span>"</span>&#125;)</span><br><span class="line">  request.body = params.to_json</span><br><span class="line">  http.request request</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">puts response.body</span><br></pre></td></tr></table></figure>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/ruby/">ruby</a><a href="/tags/third-party/">third-party</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2018/08/06/给hexo加上gitalk/" title="给hexo加上gitalk" itemprop="url">给hexo加上gitalk</a>
   </h1>
   <p class="article-author">By
@@ -312,11 +368,15 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/ruby/" title="ruby">ruby<sup>1</sup></a></li>
+				<li><a href="/tags/ruby/" title="ruby">ruby<sup>2</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/mini-magick/" title="mini_magick">mini_magick<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/third-party/" title="third-party">third-party<sup>1</sup></a></li>
 			
 		
 			
